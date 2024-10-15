@@ -97,8 +97,8 @@ uint32_t packetRateTime = 0;
 uint8_t beaconPacket[109] = {
   /*  0 - 3  */ 0x80, 0x00, 0x00, 0x00,             // Type/Subtype: managment beacon frame
   /*  4 - 9  */ 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, // Destination: broadcast
-  /* 10 - 15 */ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, // Source
-  /* 16 - 21 */ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, // Source
+  /* 10 - 15 */ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, // mac_addr
+  /* 16 - 21 */ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, // bssid
 
   // Fixed parameters
   /* 22 - 23 */ 0x00, 0x00,                         // Fragment & sequence number (will be done by the SDK)
@@ -248,6 +248,7 @@ void loop() {
 
       // write MAC address into beacon frame
       memcpy(&beaconPacket[10], macAddr, 6);
+      // write BSSID into beacon frame
       memcpy(&beaconPacket[16], macAddr, 6);
 
       // reset SSID
